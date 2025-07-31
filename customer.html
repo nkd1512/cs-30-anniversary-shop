@@ -3,39 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หน้า Shop</title>
+    <title>ร้านขายของที่ระลึก สาขาวิชาการคอมพิวเตอร์</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #FFFDF5;
-            color: #364C84;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            flex-direction: column;
-            text-align: center;
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFDF5; /* สีขาวครีม */
+            color: #364C84; /* สีน้ำเงินเข้ม */
         }
         .container {
-            background-color: #E7F1A8;
-            padding: 2.5rem;
-            border-radius: 10px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 450px;
-            border-left: 8px solid #364C84;
+            background-color: #E7F1A8; /* สีเขียวอ่อน */
         }
-        h1 {
-            color: #364C84;
-            margin-bottom: 1rem;
+        .form-section {
+            border-left: 8px solid #364C84; /* สีน้ำเงินเข้ม */
+        }
+        .form-input {
+            border: 1px solid #95B1EE; /* สีฟ้าอ่อน */
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #364C84; /* สีน้ำเงินเข้ม */
+            box-shadow: 0 0 8px rgba(54, 76, 132, 0.3);
+        }
+        .submit-button {
+            background-color: #364C84;
+        }
+        .submit-button:hover {
+            background-color: #2a3e8c;
+            transform: translateY(-2px);
+        }
+        /* Style for the select dropdown */
+        select.form-input {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23364C84" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1.25em;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>ยินดีต้อนรับสู่หน้า Shop</h1>
-        <p>หน้านี้จะแสดงสินค้าทั้งหมด</p>
+<body class="flex items-center justify-center min-h-screen p-4 md:p-8">
+    <div class="container rounded-2xl shadow-2xl p-6 sm:p-8 md:p-12 w-full max-w-4xl">
+        <div class="form-section p-6">
+            <h1 class="text-2xl sm:text-3xl font-bold mb-2 text-center text-[#364C84]">ร้านขายของที่ระลึก สาขาวิชาการคอมพิวเตอร์</h1>
+            <h2 class="text-lg sm:text-xl font-medium mb-6 text-center text-[#666]">สำหรับลูกค้า - แบบฟอร์มสั่งซื้อของที่ระลึก</h2>
+
+            <form action="#" method="post" class="space-y-6">
+                <!-- ข้อมูลส่วนตัว -->
+                <div>
+                    <h3 class="font-bold text-lg mb-2">ข้อมูลส่วนตัว</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <!-- ชื่อ-นามสกุล -->
+                        <div>
+                            <label for="full_name" class="block text-sm font-medium text-gray-700">ชื่อ-นามสกุล:</label>
+                            <input type="text" id="full_name" name="full_name" placeholder="นาย/นาง/นางสาว ตัวอย่าง นามสมมติ" class="form-input mt-1 block w-full p-2.5 rounded-md" required>
+                        </div>
+                        <!-- เบอร์โทรศัพท์ -->
+                        <div>
+                            <label for="phone_number" class="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์:</label>
+                            <input type="tel" id="phone_number" name="phone_number" placeholder="เช่น 0812345678" class="form-input mt-1 block w-full p-2.5 rounded-md" required>
+                        </div>
+                    </div>
+                    <!-- ที่อยู่สำหรับจัดส่ง -->
+                    <div class="mt-4">
+                        <label for="address" class="block text-sm font-medium text-gray-700">ที่อยู่สำหรับจัดส่ง:</label>
+                        <textarea id="address" name="address" rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล/แขวง, อำเภอ/เขต, จังหวัด, รหัสไปรษณีย์" class="form-input mt-1 block w-full p-2.5 rounded-md" required></textarea>
+                    </div>
+                </div>
+
+                <!-- รายการสั่งซื้อ -->
+                <div>
+                    <h3 class="font-bold text-lg mb-2">รายการสั่งซื้อ</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- รายการสินค้า -->
+                        <div class="col-span-2">
+                            <label class="block text-sm font-medium text-gray-700">สินค้า:</label>
+                            <div class="mt-2 space-y-2">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="item1" name="item1" value="เสื้อโปโล">
+                                    <label for="item1" class="ml-2">เสื้อโปโล</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="item2" name="item2" value="แก้วน้ำ">
+                                    <label for="item2" class="ml-2">แก้วน้ำ</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="item3" name="item3" value="กระเป๋าผ้า">
+                                    <label for="item3" class="ml-2">กระเป๋าผ้า</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ไซส์เสื้อ (แสดงเมื่อเลือกเสื้อโปโล) -->
+                        <div class="col-span-1 hidden" id="tshirt_size_section">
+                            <label for="tshirt_size" class="block text-sm font-medium text-gray-700">ไซส์เสื้อ (S, M, L, XL, XXL):</label>
+                            <select id="tshirt_size" name="tshirt_size" class="form-input mt-1 block w-full p-2.5 rounded-md">
+                                <option value="" disabled selected>เลือกไซส์</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- หมายเหตุถึงร้านค้า -->
+                <div>
+                    <label for="notes" class="block text-sm font-medium text-gray-700">หมายเหตุถึงร้านค้า:</label>
+                    <textarea id="notes" name="notes" rows="3" placeholder="เพิ่มรายละเอียดเกี่ยวกับคำสั่งซื้อของคุณ" class="form-input mt-1 block w-full p-2.5 rounded-md"></textarea>
+                </div>
+
+                <!-- ปุ่ม Submit -->
+                <div class="text-center mt-8">
+                    <button type="submit" class="submit-button text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
+                        <i class="fa-solid fa-paper-plane mr-2"></i>
+                        ส่งแบบฟอร์ม
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const poloCheckbox = document.getElementById('item1');
+            const tshirtSizeSection = document.getElementById('tshirt_size_section');
+
+            poloCheckbox.addEventListener('change', () => {
+                if (poloCheckbox.checked) {
+                    tshirtSizeSection.classList.remove('hidden');
+                } else {
+                    tshirtSizeSection.classList.add('hidden');
+                    // Reset the size selection when the checkbox is unchecked
+                    document.getElementById('tshirt_size').value = '';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
