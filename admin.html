@@ -3,39 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หน้า Admin</title>
+    <title>หน้า Admin - ร้านของที่ระลึก 30 ปี CS</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #FFFDF5;
-            color: #364C84;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            flex-direction: column;
-            text-align: center;
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFDF5; /* สีขาวครีม */
+            color: #364C84; /* สีน้ำเงินเข้ม */
         }
         .container {
-            background-color: #E7F1A8;
-            padding: 2.5rem;
-            border-radius: 10px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 450px;
-            border-left: 8px solid #364C84;
+            background-color: #E7F1A8; /* สีเขียวอ่อน */
         }
-        h1 {
+        .header-section {
+            border-left: 8px solid #364C84; /* สีน้ำเงินเข้ม */
+        }
+        .tab-button {
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+        .tab-button.active {
+            border-color: #364C84;
             color: #364C84;
-            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .tab-content {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .order-card {
+            background-color: #fff;
+            border-left: 5px solid #95B1EE;
+        }
+        .order-status-pending {
+            color: #FFC107;
+        }
+        .order-status-shipped {
+            color: #28a745;
+        }
+        .action-button {
+            background-color: #364C84;
+        }
+        .action-button:hover {
+            background-color: #2a3e8c;
+            transform: translateY(-2px);
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>ยินดีต้อนรับสู่หน้า Admin</h1>
-        <p>คุณได้เข้าสู่ระบบในฐานะ Admin สำเร็จแล้ว</p>
+<body class="flex flex-col items-center justify-start min-h-screen p-4 md:p-8">
+    <div class="container rounded-2xl shadow-2xl p-6 sm:p-8 md:p-12 w-full max-w-4xl">
+        <div class="header-section p-6">
+            <h1 class="text-2xl sm:text-3xl font-bold mb-2 text-center text-[#364C84]">หน้าจัดการ Admin</h1>
+            <p class="text-lg sm:text-xl font-medium text-center text-[#666]">สำหรับจัดการคำสั่งซื้อและสินค้า</p>
+        </div>
+
+        <div class="mt-8">
+            <!-- Tab buttons -->
+            <div class="flex justify-center border-b border-gray-300">
+                <button id="orders-tab-btn" class="tab-button px-4 py-2 text-gray-600 focus:outline-none active">คำสั่งซื้อ</button>
+                <button id="products-tab-btn" class="tab-button px-4 py-2 text-gray-600 focus:outline-none">สินค้า</button>
+            </div>
+
+            <!-- Tab content container -->
+            <div id="tab-content-container" class="mt-6">
+                <!-- Orders Tab Content -->
+                <div id="orders-tab" class="tab-content">
+                    <h3 class="text-xl font-bold mb-4">รายการคำสั่งซื้อล่าสุด</h3>
+                    <div id="orders-list" class="space-y-4">
+                        <!-- Example Order Card -->
+                        <div class="order-card p-4 rounded-lg shadow-md flex justify-between items-center">
+                            <div>
+                                <p class="font-semibold">ออเดอร์ #101</p>
+                                <p class="text-gray-600 text-sm">ชื่อ: ตัวอย่าง นามสมมติ</p>
+                                <p class="text-gray-600 text-sm">สถานะ: <span class="order-status-pending">รอดำเนินการ</span></p>
+                            </div>
+                            <button class="action-button text-white px-4 py-2 rounded-md transition-all duration-200">
+                                จัดการ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Tab Content -->
+                <div id="products-tab" class="tab-content hidden">
+                    <h3 class="text-xl font-bold mb-4">รายการสินค้า</h3>
+                    <div id="products-list" class="space-y-4">
+                        <!-- Example Product Card -->
+                        <div class="order-card p-4 rounded-lg shadow-md flex justify-between items-center">
+                            <div>
+                                <p class="font-semibold">เสื้อโปโล CS</p>
+                                <p class="text-gray-600 text-sm">ราคา: ฿250</p>
+                                <p class="text-gray-600 text-sm">สต็อก: 50 ชิ้น</p>
+                            </div>
+                            <button class="action-button text-white px-4 py-2 rounded-md transition-all duration-200">
+                                แก้ไข
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ordersTabBtn = document.getElementById('orders-tab-btn');
+            const productsTabBtn = document.getElementById('products-tab-btn');
+            const ordersTab = document.getElementById('orders-tab');
+            const productsTab = document.getElementById('products-tab');
+
+            function showTab(tabToShow, tabToHide, btnToActivate, btnToDeactivate) {
+                tabToHide.classList.add('hidden');
+                tabToShow.classList.remove('hidden');
+                btnToDeactivate.classList.remove('active');
+                btnToActivate.classList.add('active');
+            }
+
+            ordersTabBtn.addEventListener('click', () => {
+                showTab(ordersTab, productsTab, ordersTabBtn, productsTabBtn);
+            });
+
+            productsTabBtn.addEventListener('click', () => {
+                showTab(productsTab, ordersTab, productsTabBtn, ordersTabBtn);
+            });
+
+            // Initial state
+            ordersTabBtn.classList.add('active');
+        });
+    </script>
 </body>
 </html>
