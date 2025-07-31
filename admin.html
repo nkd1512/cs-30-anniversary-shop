@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>หน้า Admin - ร้านของที่ระลึก 30 ปี CS</title>
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Custom styles to match the theme */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #FFFDF5; /* สีขาวครีม */
-            color: #364C84; /* สีน้ำเงินเข้ม */
+            background-color: #FFFDF5; /* Light cream background */
+            color: #364C84; /* Dark blue text */
         }
         .container {
-            background-color: #E7F1A8; /* สีเขียวอ่อน */
+            background-color: #E7F1A8; /* Light green container background */
         }
         .header-section {
-            border-left: 8px solid #364C84; /* สีน้ำเงินเข้ม */
+            border-left: 8px solid #364C84; /* Dark blue left border */
         }
         .tab-button {
             border-bottom: 2px solid transparent;
@@ -35,21 +37,30 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .order-card {
+        .order-card, .product-card {
             background-color: #fff;
-            border-left: 5px solid #95B1EE;
+            border-left: 5px solid #95B1EE; /* Light blue left border */
         }
         .order-status-pending {
-            color: #FFC107;
+            color: #FFC107; /* Yellow for pending status */
         }
         .order-status-shipped {
-            color: #28a745;
+            color: #28a745; /* Green for shipped status */
         }
         .action-button {
             background-color: #364C84;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
         .action-button:hover {
             background-color: #2a3e8c;
+            transform: translateY(-2px);
+        }
+        .home-button {
+            background-color: #95B1EE;
+            color: #364C84;
+        }
+        .home-button:hover {
+            background-color: #7a9ee0;
             transform: translateY(-2px);
         }
     </style>
@@ -74,15 +85,26 @@
                 <div id="orders-tab" class="tab-content">
                     <h3 class="text-xl font-bold mb-4">รายการคำสั่งซื้อล่าสุด</h3>
                     <div id="orders-list" class="space-y-4">
-                        <!-- Example Order Card -->
+                        <!-- Example Order Card 1 (Pending) -->
                         <div class="order-card p-4 rounded-lg shadow-md flex justify-between items-center">
                             <div>
                                 <p class="font-semibold">ออเดอร์ #101</p>
                                 <p class="text-gray-600 text-sm">ชื่อ: ตัวอย่าง นามสมมติ</p>
-                                <p class="text-gray-600 text-sm">สถานะ: <span class="order-status-pending">รอดำเนินการ</span></p>
+                                <p class="text-gray-600 text-sm">สถานะ: <span class="order-status-pending font-bold">รอดำเนินการ</span></p>
                             </div>
-                            <button class="action-button text-white px-4 py-2 rounded-md transition-all duration-200">
+                            <button class="action-button text-white px-4 py-2 rounded-md">
                                 จัดการ
+                            </button>
+                        </div>
+                        <!-- Example Order Card 2 (Shipped) -->
+                        <div class="order-card p-4 rounded-lg shadow-md flex justify-between items-center">
+                            <div>
+                                <p class="font-semibold">ออเดอร์ #100</p>
+                                <p class="text-gray-600 text-sm">ชื่อ: ทดสอบ นามสกุล</p>
+                                <p class="text-gray-600 text-sm">สถานะ: <span class="order-status-shipped font-bold">จัดส่งแล้ว</span></p>
+                            </div>
+                            <button class="action-button text-white px-4 py-2 rounded-md">
+                                ดูรายละเอียด
                             </button>
                         </div>
                     </div>
@@ -92,20 +114,39 @@
                 <div id="products-tab" class="tab-content hidden">
                     <h3 class="text-xl font-bold mb-4">รายการสินค้า</h3>
                     <div id="products-list" class="space-y-4">
-                        <!-- Example Product Card -->
-                        <div class="order-card p-4 rounded-lg shadow-md flex justify-between items-center">
+                        <!-- Example Product Card 1 -->
+                        <div class="product-card p-4 rounded-lg shadow-md flex justify-between items-center">
                             <div>
                                 <p class="font-semibold">เสื้อโปโล CS</p>
                                 <p class="text-gray-600 text-sm">ราคา: ฿250</p>
                                 <p class="text-gray-600 text-sm">สต็อก: 50 ชิ้น</p>
                             </div>
-                            <button class="action-button text-white px-4 py-2 rounded-md transition-all duration-200">
+                            <button class="action-button text-white px-4 py-2 rounded-md">
+                                แก้ไข
+                            </button>
+                        </div>
+                        <!-- Example Product Card 2 -->
+                        <div class="product-card p-4 rounded-lg shadow-md flex justify-between items-center">
+                            <div>
+                                <p class="font-semibold">แก้วน้ำ CS</p>
+                                <p class="text-gray-600 text-sm">ราคา: ฿150</p>
+                                <p class="text-gray-600 text-sm">สต็อก: 30 ชิ้น</p>
+                            </div>
+                            <button class="action-button text-white px-4 py-2 rounded-md">
                                 แก้ไข
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Button to go back to the homepage -->
+        <div class="text-center mt-8">
+            <a href="index.html" class="home-button text-sm font-semibold py-2 px-6 rounded-md inline-block">
+                <i class="fa-solid fa-home mr-2"></i>
+                กลับไปหน้าแรก
+            </a>
         </div>
     </div>
     
@@ -131,8 +172,9 @@
                 showTab(productsTab, ordersTab, productsTabBtn, ordersTabBtn);
             });
 
-            // Initial state
+            // Set initial state: show orders tab
             ordersTabBtn.classList.add('active');
+            productsTab.classList.add('hidden'); // Ensure the products tab is hidden on initial load
         });
     </script>
 </body>
